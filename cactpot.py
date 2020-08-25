@@ -25,6 +25,8 @@ cx + by + az
 # See "payout.txt" for associated payouts associated with each sum of values
 """
 import random
+from itertools import permutations
+
 
 class Board:
     def __init__(self, **kwargs):
@@ -60,41 +62,51 @@ class Board:
         attr = self.__dict__.keys()
         self.__dict__.update((k, 0) for k in attr)
 
+    def auto_fill(self):
+        # utility function for filling in empty squares
+        attr = self.__dict__.keys()
+        fill_values = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+        for k in attr:  # check if board has some filled in spaces
+            val = getattr(self, k)
+            if val in fill_values:
+                fill_values.remove(val)
+        for k in attr:  # fill in blanks
+            val = getattr(self, k)
+            if val == 0:
+                setattr(self, k, fill_values[-1])
+                del fill_values[-1]
 
-def random_fill(board=None, return_copy=True, seed=None):
-     # seed is for debugging, leave at None
-    if board is None: # for debugging/testing, please use a filled board
-        board = Board()  # by=4)
-    attributes = vars(board)
 
-    # check which spaces have been filled, grab values
-    spaces_filled, spaces_empty = [], []
-    for k, v in attributes.items():
-        if v != 0:
-            spaces_filled.append((k, v))
-        else:
-            spaces_empty.append((k, v))
+def get_possible_positions(board):
+    # Note: if the board is completely filled in this function won't work
+    def _check_iter(iter, filled_indices):
+        nonzero_indices = [i for i,a in enumerate(filled_indices) if a != 0]
+        for idx in nonzero_indices:
+            if iter[idx] != filled_indices[idx]:
+                return False
+        return True
 
-    # instance board to return if copying
-    if return_copy is True:
-        return_board = Board()
-    else:
-        return_board = board
-    return_board.fill_multiple(dict(spaces_filled))
+    grid = board.__dict__.keys()
 
-    # get list of possible values to fill in the board with
-    values_possible = list(range(1, 10))
-    for tup in spaces_filled:
-        values_possible.remove(tup[-1])
+    filled_indices = [0]*len(grid)
+    for i, k in enumerate(grid): # get already-filled spaces
+        val = getattr(board, k)
+        if val != 0:
+            filled_indices[i] = val
 
-    # fill in remainin spaces randomly
-    random.Random(seed).shuffle(values_possible)
-    spaces_to_fill = []
-    for i, tup in enumerate(spaces_empty):
-        spaces_to_fill.append((tup[0], values_possible[i]))
-    return_board.fill_multiple(dict(spaces_to_fill))
+    board.auto_fill()
+    value_array = [getattr(board, k) for k in grid]
 
-    return return_board
+    # get every permutation of board fill
+    perms = permutations(value_array)
+
+    # filter permutations by known spaces
+    valid_perms = []
+    for i in list(perms):
+        if _check_iter(i, filled_indices):
+            valid_perms.append(i)
+
+    return valid_perms
 
 
 def create_solution_grid():
@@ -162,11 +174,15 @@ def find_payouts(solutions):
 
 if __name__ == "__main__":
     # debugging
-    from pprint import pprint
-    test_board = Board(by=4)
-    pprint(vars(test_board))
-    filled_board = random_fill(test_board, seed=4)
-    pprint(vars(filled_board))
+    # from pprint import pprint
+    # test_board = Board(by=4)
+    # pprint(vars(test_board))
+    # filled_board = random_fill(test_board, seed=4)
+    # pprint(vars(filled_board))
+    #
+    # payouts = board_solver(filled_board)
+    # print(payouts)
 
-    payouts = board_solver(filled_board)
-    print(payouts)
+    b = Board(ax=4, cz=2, ay=1, bx=3)
+    perms = get_possible_positions(b)
+    print(len(perms))
