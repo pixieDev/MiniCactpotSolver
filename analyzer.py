@@ -12,16 +12,15 @@ import matplotlib.pyplot as plt
 from copy import deepcopy
 
 
-def _monte_carlo_test(game_board, n_iters=300):
-    sim_payouts = np.ndarray(shape=(n_iters, 8))
-    n = 0
-    while n != n_iters:
-        monte_board = random_fill(game_board)
-        solutions = board_solver(monte_board)
+def _simulate_payouts(game_board, solutions):
+    sim_payouts = np.ndarray(shape=(len(solutions), 8))
+    for i, s in enumerate(solutions):
+        possible_board = Board()
+        possible_board.fill_multiple(s)
+        solutions = board_solver(possible_board)
         payouts = find_payouts(solutions)
         for p, pay_tup in enumerate(payouts):
-            sim_payouts[n, p] = pay_tup[-1]
-        n += 1
+            sim_payouts[i, p] = pay_tup[-1]
 
     return sim_payouts
 
@@ -65,7 +64,8 @@ def plot_counts(payout_counts):
 
     payout_names = _extract_payout_names(payout_counts)
     for line_name in payout_counts:
-        y = payout_counts[line_name]
+        temp = payout_counts[line_name]
+        y = [a[-1] for a in temp]
         _plot_bar(y, payout_names)
         plt.show()
         break
@@ -100,8 +100,7 @@ def simple_stats(payout_counts):
 
 
 def _analyzer_testing():
-    seed_board = Board(by=4)
-    true_board = random_fill(seed_board, seed=4)
+
     """
     # True board solution for seed=4
     2 8 7
@@ -113,11 +112,12 @@ def _analyzer_testing():
     game_board.fill(ax=2)
     game_board.fill(cy=9)
     game_board.fill(bz=3)
-
-    test_results = _monte_carlo_test(game_board)
+    solutions = get_possible_positions(game_board)
+    test_results = _simulate_payouts(game_board, solutions)
     payout_counts = count_permutation_payouts(test_results)
-    simple_stats(payout_counts)
-
+    results = simple_stats(payout_counts)
+    print(results)
+    plot_counts(payout_counts)
 if __name__ == "__main__":
     # debugging
     _analyzer_testing()

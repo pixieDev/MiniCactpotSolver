@@ -49,13 +49,33 @@ class Board:
         self.__dict__.update((k, v) for k, v in board.items() if k in attr)
 
     def fill(self, **kwargs):
-        # function for filling in the board one at a time
+        # function for filling in the board one at a time, used for testing/debugging
         for k, v in kwargs.items():
             setattr(self, k, v)
 
-    def fill_multiple(self, fill_dict):
-        # function for filling in multiple spots of the board at once
-        self.__dict__.update((k, v) for k, v in fill_dict.items())
+    def fill_multiple(self, fill_values):
+        """
+        Function for filling in multiple spots of the board at once
+
+        If "fill_values" is a dict, the board will be filled using the given
+        key-value pairs
+
+        If "fill_values" is a list, the board will be filled using the
+        index positions of the list; for example:
+            [1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+            will be filled in as
+
+            1 2 3
+            4 5 6
+            7 8 9
+
+        """
+        if type(fill_values) == dict:
+            self.__dict__.update((k, v) for k, v in fill_dict.items())
+        else:
+            attr = self.__dict__.keys()
+            self.__dict__.update((k, fill_values[i]) for i, k in enumerate(attr))
 
     def reset(self):
         # function for resetting the board to null values
@@ -135,18 +155,18 @@ def create_solution_grid():
 
 
 def board_solver(board):
-    checker = 0
-    for _, v in vars(board).items():
-        checker += v
-    if checker != 45:
-        raise ValueError("Board did not fill correctly")
+    # checker = 0
+    # for _, v in vars(board).items():
+    #     checker += v
+    # if checker != 45:
+    #     raise ValueError("Board did not fill correctly")
 
     solution_grid = create_solution_grid()
     solutions = []
     for sol_tuple in solution_grid:
         summator = []
         for position in sol_tuple:
-            summator.append(vars(board)[position])
+            summator.append(getattr(board, position))
         value = sum(summator)
         solutions.append((sol_tuple, value))
 
