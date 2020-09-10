@@ -46,7 +46,7 @@ input[type=number] {
 
 .box input[type=text] {
   width: 100%;
-  padding: 15px 15px 15px 15px;
+  padding: 19px 7px 19px 23px;
   /* margin: 8px 0; */
   box-sizing: border-box;
   border: 3px solid #ccc;
@@ -55,7 +55,7 @@ input[type=number] {
   outline: none;
 }
 
-input[type=text]:focus {
+.box input[type=text]:focus {
   border: 3px solid #555;
 }
 /* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
