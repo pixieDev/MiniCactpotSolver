@@ -11,73 +11,64 @@
     </script>
     <div class="content">
       <form class="cactpot" action="index.html" method="post">
-        <div class="grid-container">
-          <div class="grid-line 1">
-            <p>Line 1</p>
-          </div>
-          <div class="grid-line 2">
-            <p>Line 2</p>
-          </div>
-          <div class="grid-line 3">
-            <p>Line 3</p>
-          </div>
-          <div class="grid-line 4">
-            <p>Line 4</p>
+        <div class="container">
+          <div class="line-1">
+            <div class="label1"><p><br/>Line 1</p></div>
+            <div class="ax">
+              <input type="text" name="ax" size="1" maxlength="1"
+              onkeyup="this.value=this.value.replace(/[^\d]+/,'')">
+            </div>
+            <div class="ay">
+              <input type="text" name="ay" size="1" maxlength="1"
+              onkeyup="this.value=this.value.replace(/[^\d]+/,'')">
+            </div>
+            <div class="az">
+              <input type="text" name="az" size="1" maxlength="1"
+              onkeyup="this.value=this.value.replace(/[^\d]+/,'')">
+            </div>
           </div>
 
-         <div class="box">
-           <input type="text" name="ax" size="1" maxlength="1"
-           onkeyup="this.value=this.value.replace(/[^\d]+/,'')">
-         </div>
-         <div class="box">
-           <input type="text"
-           name="bx" size="1" maxlength="1">
-         </div>
-         <div class="box">
-           <input type="text" name="cx" size="1" maxlength="1"
-           onkeyup="this.value=this.value.replace(/[^\d]+/,'')">
-         </div>
-         <div class="grid-line 5">
-           <p>Line 5</p>
-         </div>
+          <div class="line-2">
+            <div class="label2"><p><br/>Line 2</p></div>
+            <div class="bx">
+              <input type="text" name="bx" size="1" maxlength="1"
+              onkeyup="this.value=this.value.replace(/[^\d]+/,'')">
+            </div>
+            <div class="by">
+              <input type="text" name="by" size="1" maxlength="1"
+              onkeyup="this.value=this.value.replace(/[^\d]+/,'')">
+            </div>
+            <div class="bz">
+              <input type="text" name="bz" size="1" maxlength="1"
+              onkeyup="this.value=this.value.replace(/[^\d]+/,'')">
+            </div>
+          </div>
 
-         <div class="box">
-           <input type="text" name="ay" size="1" maxlength="1"
-           onkeyup="this.value=this.value.replace(/[^\d]+/,'')">
-         </div>
-         <div class="box">
-           <input type="text" name="by" size="1" maxlength="1"
-           onkeyup="this.value=this.value.replace(/[^\d]+/,'')">
-         </div>
-         <div class="box">
-           <input type="text" name="cy" size="1" maxlength="1"
-           onkeyup="this.value=this.value.replace(/[^\d]+/,'')">
-         </div>
-         <div class="grid-line 6">
-           <p>Line 6</p>
-         </div>
 
-         <div class="box">
-           <input type="text" name="az" size="1" maxlength="1"
-           onkeyup="this.value=this.value.replace(/[^\d]+/,'')">
-         </div>
-         <div class="box">
-           <input type="text" name="bz" size="1" maxlength="1"
-           onkeyup="this.value=this.value.replace(/[^\d]+/,'')">
-         </div>
-         <div class="box">
-           <input type="text" name="cz" size="1" maxlength="1"
-           onkeyup="this.value=this.value.replace(/[^\d]+/,'')">
-         </div>
-         <div class="grid-line 7">
-           <p>Line 7</p>
-         </div>
+          <div class="line-3">
+            <div class="label3"><p><br/>Line 3</p></div>
+            <div class="cx">
+              <input type="text" name="cx" size="1" maxlength="1"
+              onkeyup="this.value=this.value.replace(/[^\d]+/,'')">
+            </div>
+            <div class="cy">
+              <input type="text" name="cy" size="1" maxlength="1"
+              onkeyup="this.value=this.value.replace(/[^\d]+/,'')">
+            </div>
+            <div class="cz">
+              <input type="text" name="cz" size="1" maxlength="1"
+              onkeyup="this.value=this.value.replace(/[^\d]+/,'')">
+            </div>
+          </div>
+
+        <div class="label4"><p><br/>Line 4</p></div>
+        <div class="label5"><p><br/>Line 5</p></div>
+        <div class="label6"><p><br/>Line 6</p></div>
+        <div class="label7"><p><br/>Line 7</p></div>
+        <div class="label8"><p><br/>Line 8</p></div>
 
          <div class="solve">
            <p><button>Solve!</button></p>
-         </div>
-         <div class="grid-line 8">
-           <p>Line 8</p>
          </div>
 
        </form>
@@ -93,6 +84,9 @@
           <td>Highest Payout  </td>
           <td>N/A </td><!-- Line name -->
           <td>N/A </td><!-- Payout vale -->
+        </tr>
+        <tr>
+          <td><p></td>
         </tr>
       </table>
     </div>

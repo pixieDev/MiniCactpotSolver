@@ -1,6 +1,7 @@
 * {
   box-sizing: border-box;
 }
+
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
@@ -13,18 +14,18 @@ input[type=number] {
   -moz-appearance: textfield;
 }
 
-.content{
+.content {
   max-width: 960px;
   margin: auto;
   display: grid;
   grid-template-columns: 4fr auto;
-  grid-template-rows: auto auto;
+  grid-template-rows: 4fr auto;
 }
 
-.grid-container {
+.container {
   display: grid;
-  grid-template-columns: repeat(4, 60px);
-  grid-template-rows: repeat(5, 60px);
+  grid-template-columns: repeat(4, 100px);
+  grid-template-rows: repeat(5, 100px);
   padding: 5px;
   grid-column-gap: 0px;
   grid-row-gap: 0 px;
@@ -32,8 +33,14 @@ input[type=number] {
   /* position: absolute; */
 }
 
-.grid-line{
-  font-size: 14px;
+.line-1 label:hover {
+  background-color: coral
+}
+
+.label {
+  font-size: 20px;
+  width: 100px;
+  height: 100px;
   text-align: center;
   margin: auto;
 }
@@ -44,23 +51,91 @@ input[type=number] {
   margin: auto;
 }
 
-.box input[type=text] {
+.label1{
+  grid-column: 1;
+  grid-row: 1;
+}
+.ax {
+  grid-column: 1;
+  grid-row: 2;
+}
+.ay {
+  grid-column: 1;
+  grid-row:3
+}
+.az {
+  grid-column:1;
+  grid-row:4
+}
+
+.label2 {
+  grid-column: 2;
+  grid-row: 1;
+}
+.bx {
+  grid-column: 2;
+  grid-row: 2;
+}
+.by {
+  grid-column: 2;
+  grid-row: 3;
+}
+.bz {
+  grid-column: 2;
+  grid-row: 4;
+}
+
+.label3 {
+  grid-column: 3;
+  grid-row: 1;
+}
+.cx {
+  grid-column: 3;
+  grid-row: 2;
+}
+.cy {
+  grid-column: 3;
+  grid-row: 3;
+}
+.cz {
+  grid-column: 3;
+  grid-row: 4;
+}
+
+.label4 {
+  grid-column: 4;
+  grid-row: 1
+}
+.label5 {
+  grid-column: 4;
+  grid-row: 2
+}
+.label6 {
+  grid-column: 4;
+  grid-row: 3
+}
+.label7 {
+  grid-column: 4;
+  grid-row: 4
+}
+.label8 {
+  grid-column: 4;
+  grid-row: 5
+}
+
+input[type=text] {
   width: 100%;
-  padding: 19px 7px 19px 23px;
+  padding: 37px 34px 29px 40px;
   /* margin: 8px 0; */
   box-sizing: border-box;
   border: 3px solid #ccc;
   -webkit-transition: 0.5s;
   transition: 0.5s;
   outline: none;
+  font-size: 24px;
+  font-family: serif;
 }
 
-.box input[type=text]:focus {
+input[type=text]:hover {
   border: 3px solid #555;
-}
-/* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
-@media screen and (max-width: 600px) {
-  .column.side, .column.middle {
-    width: 100%;
-  }
 }
